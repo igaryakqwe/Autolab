@@ -9,29 +9,79 @@
 </head>
 <body>
   <h1>Find Auto</h1>
-  <form method="post" action="/find-auto">
+  <form id="searchForm" method="post">
     <label for="search">Search:</label>
     <input type="text" id="search" name="search">
     <button type="submit">Search</button>
   </form>
-  <pre id="info"></pre>
+  <div id="info">
+    <h3 id="number"></h3>
+    <h3 id="brand"></h3>
+    <h3 id="model"></h3>
+    <h3 id="year"></h3>
+    <h3 id="vin"></h3>
+    <h3 id="engine"></h3>
+    <h3 id="volume"></h3>
+    <h3 id="client"></h3>
+    <h3 id="phone"></h3>
+    <h3 id="more"></h3>
+    <h3 id="error"></h3>
+  </div>
   <script>
-    const searchValue = 'CB7721CA';
-    fetch('/api/find-auto', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ searchValue: searchValue })
-    })
-      .then(response => response.json())
-      .then(data => {
-        const info = document.getElementById('info');
-        info.innerHTML = JSON.stringify(data, null, 2);
+    const searchForm = document.getElementById('searchForm');
+    const searchInput = document.getElementById('search');
+    const headers = document.querySelectorAll('h3');
+    const error = document.getElementById('error');
+
+    const names = {
+      number: 'Номер авто: ',
+      brand: 'Марка авто: ',
+      model: 'Модель: ',
+      year: 'Рік випуску: ',
+      vin: 'VIN код: ',
+      engine: 'Тип двигуна: ',
+      volume: "Об'єм двигуна: ",
+      client: 'ПІБ клієнта: ',
+      phone: 'Тел.: ',
+      more: 'Додаткова інформація: ',
+    }
+
+    searchForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const searchValue = searchInput.value;
+
+      fetch('/api/find-auto', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ searchValue: searchValue })
       })
-      .catch(error => {
-        console.error(error);
-      });
+        .then(response => response.json())
+        .then(data => {
+          if (typeof data === 'object') {
+            for (const key in data) {
+              if (data.hasOwnProperty(key)) {
+                const element = document.getElementById(key);
+                const value = data[key];
+                if (element && value !== null && value !== '') {
+                  element.textContent = names[key] + value;
+                }
+              }
+            }
+            error.textContent = '';
+          } else {
+            for (const header of headers) {
+              header.textContent = '';
+            }
+            error.textContent = 'Авто не знайдено';
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          error.textContent = 'Помилка підключення до сервера';
+        });
+    });
   </script>
 </body>
 </html>
