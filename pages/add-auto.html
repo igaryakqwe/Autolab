@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/add-auto.css">
+  <title>Додати авто</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Додати авто</h1>
+    <form id="addAutoForm" action="/add-auto" method="POST">
+      <div class="form">
+        <div>
+          <label for="number">Номер:</label>
+          <input type="text" id="number" name="number" required>
+        </div>
+        <div>
+          <label for="brand">Марка</label>
+          <input list="brand" id="brand" name="brand" required>
+          <datalist id="brand">
+            <option value="Ford">
+            <option value="Chevrolet">
+            <option value="Audi">
+            <option value="BMW">
+            <option value="Mercedes-Benz">
+          </datalist>
+        </div>
+        <div>
+          <label for="model">Модель</label>
+          <input list="model" id="model" name="model">
+          <datalist id="model">
+            <option value="Ford">
+            <option value="Chevrolet">
+            <option value="Audi">
+            <option value="BMW">
+            <option value="Mercedes-Benz">
+          </datalist>
+        </div>
+        <div>
+          <label for="year">Рік випуску</label>
+          <input type="number" name="year" id="year">
+        </div>
+        <div>
+          <label for="vin">VIN код</label>
+          <input type="text" name="vin" id="vin">
+        </div>
+        <div>
+          <label for="engine">Тип двигуна</label>
+          <input type="text" name="engine" id="engine">
+        </div>
+        <div>
+          <label for="volume">Об'єм</label>
+          <input type="text" name="volume" id="volume">
+        </div>
+        <div>
+          <label for="client">ПІБ клієнта</label>
+          <input type="text" name="client" id="client">
+        </div>
+        <div>
+          <label for="phone">Тел.</label>
+          <input type="number" name="phone" id="phone">
+        </div>
+      </div>
+      <div class="more">
+        <label for="more">Додаткова інформація</label>
+        <textarea name="more" id="more"></textarea>
+      </div>
+      <div>
+        <button type="submit">Додати авто</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

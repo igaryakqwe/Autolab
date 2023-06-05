@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/find-auto.css">
+  <title>Знайти авто</title>
+</head>
+<body>
+  <h1>Find Auto</h1>
+  <form method="post" action="/find-auto">
+    <label for="search">Search:</label>
+    <input type="text" id="search" name="search">
+    <button type="submit">Search</button>
+  </form>
+  <pre id="info"></pre>
+  <script>
+    const searchValue = 'CB7721CA';
+    fetch('/api/find-auto', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ searchValue: searchValue })
+    })
+      .then(response => response.json())
+      .then(data => {
+        const info = document.getElementById('info');
+        info.innerHTML = JSON.stringify(data, null, 2);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  </script>
+</body>
+</html>
