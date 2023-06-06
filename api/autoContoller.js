@@ -2,23 +2,19 @@
 
 const fs = require('fs');
 
-const generateUniqueId = async () => {
-  return new Promise((resolve, reject) => {
-    fs.readFile('./data.json', 'utf8', (err, data) => {
-      if (err) {
-        reject(err);
-      } else {
-        const cars = JSON.parse(data);
-        const id = cars.length;
-        resolve(id);
-      }
-    });
-  });
-};
+const generateUniqueId = (length) => {
+  let characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  let randomString = '';
+  for (let i = 0; i < length; i++) {
+    let randomIndex = Math.floor(Math.random() * characters.length);
+    randomString += characters.charAt(randomIndex);
+  }
+  return randomString;
+}
 
-const factorifyAuto = (number, brand, model, year, vin, engine, volume, client, phone, more = '', works = []) => {
+const factorifyAuto = (number, brand, model, year, vin = '', engine, volume, client, phone, more = '', works = []) => {
   return { 
-    id: generateUniqueId(),
+    id: generateUniqueId(6),
     number, 
     brand, 
     model, 
