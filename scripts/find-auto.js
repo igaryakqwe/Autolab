@@ -116,14 +116,14 @@ searchForm.addEventListener('submit', (event) => {
         }
 
         const deleteButton = createDeleteButton(data.number);
-        deleteContainer.innerHTML = ''; // Очищаємо контейнер перед додаванням кнопки
+        deleteContainer.innerHTML = '';
         deleteContainer.appendChild(deleteButton);
 
         error.textContent = '';
 
         if (Array.isArray(data.works) && data.works.length > 0) {
           worksHeader.textContent = 'Список робіт:';
-          worksContainer.innerHTML = ''; // Очищаємо контейнер перед додаванням нового вмісту
+          worksContainer.innerHTML = '';
           worksContainer.appendChild(worksHeader);
 
           const worksList = createListElement(data.works.map(work => {
@@ -131,7 +131,7 @@ searchForm.addEventListener('submit', (event) => {
               createListElement([
                 createNestedElement('li', 'Перелік робіт:', [
                   createListElement(work.done.map(work => {
-                    return createNestedElement('li', `Тип: ${work.type}, ціна: ${work.price} грн.`);
+                    return createNestedElement('li', `${work.type} - ${work.price} грн.`);
                   }))
                 ]),
                 work.more !== null && createNestedElement('li', work.more),
@@ -142,7 +142,7 @@ searchForm.addEventListener('submit', (event) => {
           worksContainer.appendChild(worksList);
           worksContainer.appendChild(total);
         } else {
-          worksContainer.innerHTML = ''; // Очищаємо контейнер перед додаванням нового вмісту
+          worksContainer.innerHTML = '';
           const notFoundWorks = document.createElement('h4');
           notFoundWorks.innerHTML = 'Робіт поки що немає';
           worksContainer.appendChild(notFoundWorks);
