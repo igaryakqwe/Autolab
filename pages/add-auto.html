@@ -73,16 +73,11 @@
           throw new Error('An error occurred while adding the auto.');
         }
 
-        // Auto added successfully
         const addedAuto = await response.json();
         console.log('Auto added:', addedAuto);
 
-        // Redirect to auto page
-        const redirectUrl = `/auto-page?id=${addedAuto.id}`;
-        window.location.href = redirectUrl;
       } catch (error) {
         console.error(error);
-        // Handle error
       }
     }
   </script>

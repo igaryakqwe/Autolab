@@ -27,11 +27,16 @@
     <h3 id="more"></h3>
     <h3 id="error"></h3>
   </div>
+  <div id="works">
+    <ul id="worksList"></ul>
+  </div>
   <script>
     const searchForm = document.getElementById('searchForm');
     const searchInput = document.getElementById('search');
     const headers = document.querySelectorAll('h3');
     const error = document.getElementById('error');
+    const worksListUl = document.getElementById('worksList');
+    const worksList = document.getElementById('works')
 
     const names = {
       number: 'Номер авто: ',
@@ -60,16 +65,58 @@
         .then(response => response.json())
         .then(data => {
           if (typeof data === 'object') {
-            for (const key in data) {
-              if (data.hasOwnProperty(key)) {
-                const element = document.getElementById(key);
-                const value = data[key];
-                if (element && value !== null && value !== '') {
-                  element.textContent = names[key] + value;
-                }
+            for (const [key, value] of Object.entries(data)) {
+              const element = document.getElementById(key);
+              if (element && typeof value === 'string' && value !== '') {
+                element.textContent = names[key] + value;
               }
             }
             error.textContent = '';
+            
+            // Очистка раніше виведених робіт
+            worksListUl.innerHTML = '';
+
+            // Виведення робіт
+            if (Array.isArray(data.works) && data.works.length > 0) {
+              const createNestedElement = (tagName, textContent, children) => {
+              const element = document.createElement(tagName);
+              if (textContent) {
+                element.textContent = textContent;
+              }
+              if (children && children.length > 0) {
+                children.forEach(child => element.appendChild(child));
+              }
+              return element;
+            };
+
+            const createListElement = (items) => {
+              const list = document.createElement('ul');
+              items.forEach(item => {
+                const listItem = createNestedElement('li', null, [item]);
+                list.appendChild(listItem);
+              });
+              return list;
+            };
+
+            data.works.forEach(work => {
+              const workList = createListElement([
+                createNestedElement('li', work.date, [
+                  createListElement([
+                    createNestedElement('li', 'Перелік робіт:', [
+                      createListElement(work.works.map(work => {
+                        return createNestedElement('li', `Тип: ${work.type}, ціна: ${work.price} грн.`);
+                      }))
+                    ]),
+                    work.more !== null && createNestedElement('li', work.more)
+                  ])
+                ])
+              ]);
+
+              worksList.appendChild(workList);
+            });
+
+            document.body.appendChild(worksList);
+            }
           } else {
             for (const header of headers) {
               header.textContent = '';
