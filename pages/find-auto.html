@@ -28,15 +28,62 @@
     <h3 id="error"></h3>
   </div>
   <div id="works">
+    <h3 id="worksHeader"></h3>
     <ul id="worksList"></ul>
+    <h3 id="total"></h3>
   </div>
   <script>
     const searchForm = document.getElementById('searchForm');
     const searchInput = document.getElementById('search');
     const headers = document.querySelectorAll('h3');
     const error = document.getElementById('error');
-    const worksListUl = document.getElementById('worksList');
-    const worksList = document.getElementById('works')
+    const worksList = document.getElementById('worksList');
+    const worksHeader = document.getElementById('worksHeader');
+    const total = document.getElementById('total');
+    const worksContainer = document.getElementById('works');
+
+    const createNestedElement = (tagName, textContent, children) => {
+      const element = document.createElement(tagName);
+      if (textContent) {
+        element.textContent = textContent;
+      }
+      if (children && children.length > 0) {
+        children.forEach(child => {
+          if (child instanceof Node) {
+            element.appendChild(child);
+          } else {
+            const nestedElement = createNestedElement(child.tagName, child.textContent, child.children);
+            element.appendChild(nestedElement);
+          }
+        });
+      }
+      return element;
+    };
+
+    const createListElement = (items) => {
+      const list = document.createElement('ul');
+      items.forEach(item => {
+        if (item instanceof Node) {
+          const listItem = document.createElement('li');
+          listItem.appendChild(item);
+          list.appendChild(listItem);
+        } else {
+          const listItem = createNestedElement(item.tagName, item.textContent, item.children);
+          list.appendChild(listItem);
+        }
+      });
+      return list;
+    };
+
+    const totalSum = (data) => {
+      let total = 0;
+      for (const item of data.works) {
+        for (const work of item.done) {
+          total += work.price;
+        }
+      }
+      return total;
+    }
 
     const names = {
       number: 'Номер авто: ',
@@ -54,6 +101,7 @@
     searchForm.addEventListener('submit', (event) => {
       event.preventDefault();
       const searchValue = searchInput.value;
+      worksList.innerHTML = '';
 
       fetch('/api/find-auto', {
         method: 'POST',
@@ -72,50 +120,32 @@
               }
             }
             error.textContent = '';
-            
-            // Очистка раніше виведених робіт
-            worksListUl.innerHTML = '';
 
-            // Виведення робіт
             if (Array.isArray(data.works) && data.works.length > 0) {
-              const createNestedElement = (tagName, textContent, children) => {
-              const element = document.createElement(tagName);
-              if (textContent) {
-                element.textContent = textContent;
-              }
-              if (children && children.length > 0) {
-                children.forEach(child => element.appendChild(child));
-              }
-              return element;
-            };
+              worksHeader.textContent = 'Список робіт:';
+              worksContainer.innerHTML = ''; // Очищаємо контейнер перед додаванням нового вмісту
+              worksContainer.appendChild(worksHeader);
 
-            const createListElement = (items) => {
-              const list = document.createElement('ul');
-              items.forEach(item => {
-                const listItem = createNestedElement('li', null, [item]);
-                list.appendChild(listItem);
-              });
-              return list;
-            };
-
-            data.works.forEach(work => {
-              const workList = createListElement([
-                createNestedElement('li', work.date, [
+              const worksList = createListElement(data.works.map(work => {
+                return createNestedElement('li', work.date, [
                   createListElement([
                     createNestedElement('li', 'Перелік робіт:', [
-                      createListElement(work.works.map(work => {
+                      createListElement(work.done.map(work => {
                         return createNestedElement('li', `Тип: ${work.type}, ціна: ${work.price} грн.`);
                       }))
                     ]),
-                    work.more !== null && createNestedElement('li', work.more)
-                  ])
-                ])
-              ]);
-
-              worksList.appendChild(workList);
-            });
-
-            document.body.appendChild(worksList);
+                    work.more !== null && createNestedElement('li', work.more),
+                  ]),
+                ]);
+              }));
+              total.textContent = `Загальна сумма: ${totalSum(data)} грн`;
+              worksContainer.appendChild(worksList);
+              worksContainer.appendChild(total);
+            } else {
+              worksContainer.innerHTML = ''; // Очищаємо контейнер перед додаванням нового вмісту
+              const notFoundWorks = document.createElement('h4');
+              notFoundWorks.innerHTML = 'Робіт поки що немає';
+              worksContainer.appendChild(notFoundWorks);
             }
           } else {
             for (const header of headers) {
