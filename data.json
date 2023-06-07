@@ -5,13 +5,38 @@
     "brand": "Chevrolet",
     "model": "Lacetti",
     "year": "2007",
-    "vin": "rewrewrw",
+    "vin": "Y6D1103078XXXXXXX",
     "engine": "Бензин",
     "volume": "1.6",
-    "client": "Новиков М.М.",
-    "phone": "380974161132",
+    "client": "Ім'я Прізвище",
+    "phone": "380154156454",
     "more": null,
-    "works": []
+    "works": [
+      {
+        "date": "08.06.2005",
+        "more": "",
+        "done": [
+          {
+            "type": "Заміна масла",
+            "price": 150
+          },
+          {
+            "type": "Заміна фільтру",
+            "price": 300
+          }
+        ]
+      },
+      {
+        "date": "08.06.2002",
+        "more": "",
+        "done": [
+          {
+            "type": "Заміна масла",
+            "price": 150
+          }
+        ]
+      }
+    ]
   },
   {
     "id": 2,
@@ -19,10 +44,10 @@
     "brand": "Audi",
     "model": "R8",
     "year": "2013",
-    "vin": "rewrewrw",
+    "vin": "Y6D1103078XXXXXXX",
     "engine": "Дизель",
     "volume": "2.0",
-    "client": "Новиков І.М.",
+    "client": "Ім'я Прізвище 2",
     "phone": "380974161132",
     "more": null,
     "works": []
@@ -31,92 +56,25 @@
     "id": 3,
     "number": "CB7723CA",
     "brand": "Opel",
-    "model": "Lacetti",
+    "model": "Astra",
     "year": "2007",
-    "vin": "rewrewrw",
+    "vin": "Y6D1103078XXXXXXX",
     "engine": "Бензин",
     "volume": "1.6",
-    "client": "Новиков М.М.",
+    "client": "Ім'я Прізвище 3",
     "phone": "5",
     "more": null,
     "works": [
       {
         "date": "08.06.2005",
         "more": null,
-        "works": [
-          { "type": "Заміна масла", "price": 150 }
+        "done": [
+          {
+            "type": "Заміна масла",
+            "price": 150
+          }
         ]
       }
     ]
-  },
-  {
-    "id": 4,
-    "number": "CB7725CA",
-    "brand": "Opel",
-    "model": "Lacetti",
-    "year": "2007",
-    "vin": "rewrewrw",
-    "engine": "Бензин",
-    "volume": "1.6",
-    "client": "Новиков М.М.",
-    "phone": "5",
-    "more": "fdsfsfdsfs",
-    "works": []
-  },
-  {
-    "id": 5,
-    "number": "CB7612CA",
-    "brand": "Chevrolet",
-    "model": "Lacetti",
-    "year": "2007",
-    "vin": "rewrewrw",
-    "engine": "Бензин",
-    "volume": "1.6",
-    "client": "Новиков М.М.",
-    "phone": "380974161132",
-    "more": "",
-    "works": []
-  },
-  {
-    "id": 6,
-    "number": "CB7728CA",
-    "brand": "Opel",
-    "model": "Lacetti",
-    "year": "2007",
-    "vin": "rewrewrw",
-    "engine": "Бензин",
-    "volume": "1.6",
-    "client": "Новиков М.М.",
-    "phone": "0974116152",
-    "more": "",
-    "works": []
-  },
-  {
-    "id": 7,
-    "number": "CB7730CA",
-    "brand": "Chevrolet",
-    "model": "Lacetti",
-    "year": "2007",
-    "vin": "rewrewrw",
-    "engine": "Бензин",
-    "volume": "1.6",
-    "client": "Новиков М.М.",
-    "phone": "380974161132",
-    "more": "",
-    "works": []
-  },
-  {
-    "id": 8,
-    "number": "CB77231CA",
-    "brand": "Chevrolet",
-    "model": "Lacetti",
-    "year": "2007",
-    "vin": "rewrewrw",
-    "engine": "Бензин",
-    "volume": "1.6",
-    "client": "Новиков М.М.",
-    "phone": "380974161123",
-    "more": "",
-    "works": []
   }
 ]

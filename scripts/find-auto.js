@@ -138,12 +138,12 @@ searchForm.addEventListener('submit', (event) => {
               ]),
             ]);
           }));
-          total.textContent = `Загальна сумма: ${totalSum(data)} грн`;
+          total.textContent = `Загальна сумма: ${totalSum(data)} грн.`;
           worksContainer.appendChild(worksList);
           worksContainer.appendChild(total);
         } else {
           worksContainer.innerHTML = '';
-          const notFoundWorks = document.createElement('h4');
+          const notFoundWorks = document.createElement('h3');
           notFoundWorks.innerHTML = 'Робіт поки що немає';
           worksContainer.appendChild(notFoundWorks);
         }

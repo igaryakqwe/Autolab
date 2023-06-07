@@ -8,32 +8,37 @@
   <title>Знайти авто</title>
 </head>
 <body>
-<h1>Find Auto</h1>
-<form id="searchForm" method="post">
-  <label for="search">Search:</label>
-  <input type="text" id="search" name="search">
-  <button type="submit">Search</button>
-</form>
-<div id="info">
-  <h3 id="number"></h3>
-  <h3 id="brand"></h3>
-  <h3 id="model"></h3>
-  <h3 id="year"></h3>
-  <h3 id="vin"></h3>
-  <h3 id="engine"></h3>
-  <h3 id="volume"></h3>
-  <h3 id="client"></h3>
-  <h3 id="phone"></h3>
-  <h3 id="more"></h3>
-  <h3 id="error"></h3>
-  <div id="deleteContainer"></div>
-</div>
-
-<div id="works">
-  <h3 id="worksHeader"></h3>
-  <ul id="worksList"></ul>
-  <h3 id="total"></h3>
-</div>
-<script src="scripts/find-auto.js"></script>
+  <a href="/">На головну</a>
+  <h1>Знайти авто</h1>
+  <form id="searchForm" method="post">
+    <input type="text" id="search" name="search">
+    <div class="buttons">
+      <div class="submit">
+        <button type="submit">Знайти</button>
+      </div>
+      <div id="deleteContainer"></div>
+    </div>
+  </form>
+  <div class="output">
+    <div id="info">
+      <h3 id="error"></h3>
+      <h3 id="number"></h3>
+      <h3 id="brand"></h3>
+      <h3 id="model"></h3>
+      <h3 id="year"></h3>
+      <h3 id="vin"></h3>
+      <h3 id="engine"></h3>
+      <h3 id="volume"></h3>
+      <h3 id="client"></h3>
+      <h3 id="phone"></h3>
+      <h3 id="more"></h3>
+    </div>
+    <div id="works">
+      <h3 id="worksHeader"></h3>
+      <ul id="worksList"></ul>
+      <h3 id="total"></h3>
+    </div>
+  </div>
+  <script src="/scripts/find-auto.js"></script>
 </body>
 </html>

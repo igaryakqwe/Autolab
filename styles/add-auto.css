@@ -1,42 +1,74 @@
 body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
 }
 
-.container {
+.input {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.form {
+.grid-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 15px;
-  width: 1240px;
-}
-.form label {
-  display: block;
-  margin-bottom: 5px;
-}
-.form input,
-.form textarea {
-  width: 350px;
-  height: 30px;
-  padding: 5px;
-}
-.form > div {
-  grid-column: span 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
 }
 
-.more {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.center {
+  text-align: center;
+}
+
+input {
+  width: 250px;
+  height: 34px;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+input::placeholder {
+  font-size: 10px;
+  text-align: center;
+}
+
+label {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+textarea {
+  width: 400px;
+  height: 80px;
+  font-size: 20px;
+  overflow: auto;
+}
+
+textarea::placeholder {
+  text-align: center;
+  font-size: 15px;
+}
+
+button {
+  margin-top: 10px;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  font-weight: 600;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
 }

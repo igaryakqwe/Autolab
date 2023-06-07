@@ -1,43 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Add Auto</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Додати авто</title>
   <link rel="stylesheet" href="styles/add-auto.css">
 </head>
 <body>
-  <h1>Add Auto</h1>
-  <form id="addAutoForm">
-    <label for="number">Number:</label>
-    <input type="text" id="number" name="number" required><br><br>
+  <h1>Додати авто</h1>
+  <form id="addAutoForm" class="center">
+    <div class="grid-container">
+      <div class="input">
+        <label for="number">Номер</label>
+        <input type="text" id="number" name="number" required>
+      </div>
 
-    <label for="brand">Brand:</label>
-    <input type="text" id="brand" name="brand" required><br><br>
+      <div class="input">
+        <label for="brand">Марка</label>
+        <input type="text" id="brand" name="brand" required>
+      </div>
 
-    <label for="model">Model:</label>
-    <input type="text" id="model" name="model" required><br><br>
+      <div class="input">
+        <label for="model">Модель</label>
+        <input type="text" id="model" name="model" required>
+      </div>
 
-    <label for="year">Year:</label>
-    <input type="text" id="year" name="year" required><br><br>
+      <div class="input">
+        <label for="year">Рік</label>
+        <input type="text" id="year" name="year" required>
+      </div>
 
-    <label for="vin">VIN:</label>
-    <input type="text" id="vin" name="vin" required><br><br>
+      <div class="input">
+        <label for="vin">VIN</label>
+        <input placeholder="(необов'язково)" type="text" id="vin" name="vin">
+      </div>
 
-    <label for="engine">Engine:</label>
-    <input type="text" id="engine" name="engine" required><br><br>
+      <div class="input">
+        <label for="engine">Тип дивгуна</label>
+        <input type="text" id="engine" name="engine" required>
+      </div>
 
-    <label for="volume">Volume:</label>
-    <input type="text" id="volume" name="volume" required><br><br>
+      <div class="input">
+        <label for="volume">Об'єм дивгуна</label>
+        <input type="text" id="volume" name="volume" required>
+      </div>
 
-    <label for="client">Client:</label>
-    <input type="text" id="client" name="client" required><br><br>
+      <div class="input">
+        <label for="client">ПІБ клієнта</label>
+        <input type="text" id="client" name="client" required>
+      </div>
 
-    <label for="phone">Phone:</label>
-    <input type="text" id="phone" name="phone" required><br><br>
+      <div class="input">
+        <label for="phone">Телефон</label>
+        <input type="text" id="phone" name="phone" required>
+      </div>
+    </div>
 
-    <label for="more">More:</label>
-    <textarea id="more" name="more"></textarea><br><br>
+    <div class="input">
+      <label for="more">Доаткова інформація</label>
+      <textarea placeholder="(необов'язково)" id="more" name="more"></textarea>
+    </div>
 
-    <button type="submit">Add</button>
+    <button type="submit">Додати</button>
   </form>
   <script src="/scripts/add-auto.js"></script>
 </body>
