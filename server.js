@@ -22,6 +22,10 @@ const createCSSPath = (page) => {
   return path.resolve(__dirname, page);
 }
 
+const createJSPath = (page) => {
+  return path.resolve(__dirname, page);
+}
+
 const server = http.createServer(async (req, res) => {
   res.setHeader('Content-Type', types.html);
 
@@ -141,11 +145,25 @@ const server = http.createServer(async (req, res) => {
           }
         });
         return;
+      } else if (req.url.endsWith('.js')) {
+        const jsPath = createJSPath(req.url.slice(1));
+        fs.readFile(jsPath, (err, data) => {
+          if (err) {
+            console.log(err);
+            res.statusCode = 404;
+            res.end();
+          } else {
+            res.setHeader('Content-Type', types.js);
+            res.write(data);
+            res.end();
+          }
+        });
+        return;
       } else {
         basePath = createHTMLPath('error');
         res.statusCode = 404;
       }
-    break;
+      break; 
   }
 
   fs.readFile(basePath, (err, data) => {
