@@ -4,28 +4,26 @@ const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const autoController = require('./api/autoContoller');
-const url = require('url');
-
-const api = new Map();
 
 const PORT = 3000;
 
 const types = {
-  html: "text/html",
-  js: "application/javascript",
-  css: "text/css",
+  html: 'text/html',
+  js: 'application/javascript',
+  css: 'text/css',
+  json: 'application/json'
 };
+
+const createHTMLPath = (page) => {
+  return path.resolve(__dirname, './pages', `${page}.html`);
+}
+
+const createCSSPath = (page) => {
+  return path.resolve(__dirname, page);
+}
 
 const server = http.createServer(async (req, res) => {
   res.setHeader('Content-Type', types.html);
-
-  const createHTMLPath = (page) => {
-    return path.resolve(__dirname, './pages', `${page}.html`);
-  }
-  
-  const createCSSPath = (page) => {
-    return path.resolve(__dirname, page);
-  }
 
   let basePath = '';
 
@@ -57,11 +55,11 @@ const server = http.createServer(async (req, res) => {
             const formData = JSON.parse(data);
             const { number, brand, model, year, vin, engine, volume, client, phone, more } = formData;
     
-            autoController.addAuto(number, brand, model, year, vin, engine, volume, client, phone, more, (err, addedAuto) => {
+            await autoController.addAuto(number, brand, model, year, vin, engine, volume, client, phone, more, (err, addedAuto) => {
               if (err) {
                 res.statusCode = 500;
                 res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({ error: 'An error occurred while adding the auto.' }));
+                res.end(JSON.stringify({error: 'An error occurred while adding the auto.'}));
               } else {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
@@ -102,7 +100,32 @@ const server = http.createServer(async (req, res) => {
       } else {
         res.statusCode = 404;
       }
-      break; 
+      break;
+    case '/api/delete-auto':
+      if (req.method === 'POST') {
+        let data = '';
+        req.on('data', chunk => {
+          data += chunk;
+        });
+        req.on('end', async () => {
+          const params = JSON.parse(data);
+          const deleteValue = params.deleteValue;
+
+          autoController.deleteAuto(deleteValue)
+            .then(result => {
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify(result));
+            })
+            .catch(error => {
+              res.statusCode = 500;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: 'An error occurred' }));
+            });
+        });
+      } else {
+        res.statusCode = 404;
+      }
+      break;
     default:
       if (req.url.endsWith('.css')) {
         const cssPath = createCSSPath(req.url.slice(1));
