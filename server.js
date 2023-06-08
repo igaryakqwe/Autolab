@@ -44,10 +44,6 @@ const server = http.createServer(async (req, res) => {
       basePath = createHTMLPath('find-auto');
       res.statusCode = 200;
       break;
-    case '/auto-page':
-      basePath = createHTMLPath('auto-page');
-      res.statusCode = 200;
-      break;
     case '/api/add-auto':
       if (req.method === 'POST') {
         let data = '';
