@@ -134,7 +134,7 @@ searchForm.addEventListener('submit', (event) => {
                     return createNestedElement('li', `${work.type} - ${work.price} грн.`);
                   }))
                 ]),
-                work.more !== null && createNestedElement('li', work.more),
+                work.more !== null && work.more !== '' && createNestedElement('li', work.more),
               ]),
             ]);
           }));
